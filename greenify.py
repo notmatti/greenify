@@ -26,6 +26,8 @@ Greenify input that start with ">".
 Requires WeeChat version 0.3.7 or higher.
 
 History:
+2017-05-25: Matthias Adamczyk <mail@notmatti.me>
+    version 0.2: Also match ">_>"
 2017-04-01: Matthias Adamczyk <mail@notmatti.me>
     version 0.1: Initial release
 
@@ -43,7 +45,7 @@ except ImportError:
 
 SCRIPT_NAME = "greenify"
 SCRIPT_AUTHOR = "Matthias Adamczyk <mail@notmatti.me>"
-SCRIPT_VERSION = "0.1"
+SCRIPT_VERSION = "0.2"
 SCRIPT_LICENSE = "MIT"
 SCRIPT_DESC = "Greenify input that start with \">\""
 SCRIPT_COMMAND = SCRIPT_NAME
@@ -53,9 +55,9 @@ def greenify_input_cb(data, modifier_name, buffer, input_string):
     """Greenify input that start with ">".
 
     This callback will greenify every input that start with a ">",
-    except for messages that start with "> ", ">.>", ">.<" and ">_<".
+    except for messages that start with "> ", ">.>", ">.<", ">_>" and ">_<".
     """
-    regex = re.compile(">_+<")
+    regex = re.compile(">_+(<|>)")
     match = regex.match(input_string)
 
     if (input_string.startswith(">")
